@@ -12,25 +12,51 @@
 
 {{-- Unless executa caso seja false--}}
 
-@isset($providers){{--verificar se uma variável está ativa--}}
+@isset($providers) {{--verificar se uma variável está ativa--}}
 
-    Fornecedor : {{ $providers[1]['nome']}}
-    <br>
-    Status : {{$providers[1]['status']}}
-    <br>
-    CNPJ : {{$providers[1]['CNPJ'] ?? 'CNPJ inválido'}} {{--$variavel testada estiver indefinida(isset) ou vazia(empty) aplicamos um valor default--}}
-    
-            
-    
+    @forelse($providers as $i => $provider)
+        Interação Atual: {{ $loop->iteration }}
+        <br>
+        Fornecedor :  {{$provider['nome']}}
+        <br>
+        Status : {{$provider['status']}}
+            @unless($provider['status'] == 'S')
+                (Fornecedor Inativo)
+            @endunless
+        <br>
+        CNPJ : {{$provider['CNPJ'] ?? 'CNPJ Inválido'}}
+        <br>
+        Telefone: ({{$provider['DDD']}}){{$provider['Telefone']}}
+        @switch($provider['DDD'])
+            @case('85')
+                (Fortaleza-CE)
+            @break
+
+            @case('32')
+                (Juiz de Fora-MG)
+            @break
+
+            @case('11')
+                (São Paulo-SP)
+            @break
+
+            @default
+                (Desconhecido)
+        @endswitch
+        <br>
+        @if($loop->first)
+            Primeira Interação do Loop
+                @elseif($loop->last)
+                    Útilma Interação do Loop                
+        @endif
+        <hr>
+    @empty
+    Não Existe Fornecedores
+    @endforelse
+@endisset
 
 
-  
 
-    
-
-@endisset 
-
-    
 
   
    
