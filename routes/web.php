@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get ('/', 'MainController@main')->name('site.main');// 'name' is util only in our code
 Route::get('/aboutus', 'AboutUsController@about')->name('site.aboutus'); 
 Route::get('/contact', 'ContactController@contact')->name('site.contact');
+Route::post('/contact', 'ContactController@contact')->name('site.contact');
 Route::get('/login', function(){return 'Login';})->name('site.login');
 
 Route::prefix('/app')->group( function() {
@@ -25,10 +26,6 @@ Route::prefix('/app')->group( function() {
     Route::get('/provider', 'ProviderController@index')->name('app.provider');
     Route::get('/products',function(){return 'Products';})->name('app.products');
 });
-
-Route::get('/rota1', function(){
-    echo "Rota1";
-}) ->name('site.rota1');
 
 Route::fallback(function(){
     echo 'A rota acessada não existe. <a href="'.route('site.main').'">Clique aqui</a> para retornar ';
