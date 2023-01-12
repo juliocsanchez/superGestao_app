@@ -30,7 +30,6 @@ class CreateUnitsTable extends Migration
         Schema::table('product_details', function (Blueprint $table){
             $table->unsignedBigInteger('unit_id');
             $table->foreign('unit_id')->references('id')->on('units');
-
         });
     }
 
@@ -41,15 +40,15 @@ class CreateUnitsTable extends Migration
      */
     public function down()
     {
-
+        
         Schema::table('product_details', function (Blueprint $table){
             $table->dropForeign('product_details_unit_id_foreign');
-            $table->dropColumn('unit');
+            $table->dropColumn('unit_id');
         });
 
         Schema::table('products', function (Blueprint $table){
             $table->dropForeign('products_unit_id_foreign');
-            $table->dropColumn('unit');
+            $table->dropColumn('unit_id');
         });
 
         Schema::dropIfExists('units');
