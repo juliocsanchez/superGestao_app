@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get ('/', 'MainController@main')->name('site.main');// 'name' is util only in our code
 Route::get('/aboutus', 'AboutUsController@about')->name('site.aboutus'); 
 Route::get('/contact', 'ContactController@contact')->name('site.contact');
-Route::post('/contact', 'ContactController@contact')->name('site.contact');
+Route::post('/contact', 'ContactController@save')->name('site.contact');
 Route::get('/login', function(){return 'Login';})->name('site.login');
 
 Route::prefix('/app')->group( function() {
