@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\LogAcessMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(LogAcessMiddleware::class)
+    ->name('site.main')
+    ->get ('/', 'MainController@main');
 
-
-Route::get ('/', 'MainController@main')->name('site.main');// 'name' is util only in our code
 Route::get('/aboutus', 'AboutUsController@about')->name('site.aboutus'); 
 Route::get('/contact', 'ContactController@contact')->name('site.contact');
 Route::post('/contact', 'ContactController@save')->name('site.contact');
