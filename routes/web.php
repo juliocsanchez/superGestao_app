@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\LogAcessMiddleware;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +14,13 @@ use App\Http\Middleware\LogAcessMiddleware;
 |
 */
 
-Route::middleware(LogAcessMiddleware::class)
-    ->name('site.main')
-    ->get ('/', 'MainController@main');
-
+Route::get ('/', 'MainController@main')->name('site.main');
 Route::get('/aboutus', 'AboutUsController@about')->name('site.aboutus'); 
 Route::get('/contact', 'ContactController@contact')->name('site.contact');
 Route::post('/contact', 'ContactController@save')->name('site.contact');
 Route::get('/login', function(){return 'Login';})->name('site.login');
 
-Route::prefix('/app')->group( function() {
+Route::middleware('authenticade:padrao')->prefix('/app')->group( function() {
     Route::get('/clients', function(){return 'Clients';})->name('app.client');
     Route::get('/provider', 'ProviderController@index')->name('app.provider');
     Route::get('/products',function(){return 'Products';})->name('app.products');
