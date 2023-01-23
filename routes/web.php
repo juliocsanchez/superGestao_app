@@ -18,7 +18,7 @@ Route::get ('/', 'MainController@main')->name('site.main');
 Route::get('/aboutus', 'AboutUsController@about')->name('site.aboutus'); 
 Route::get('/contact', 'ContactController@contact')->name('site.contact');
 Route::post('/contact', 'ContactController@save')->name('site.contact');
-Route::get('/login', 'LoginController@index')->name('site.login');
+Route::get('/login/{erro?}', 'LoginController@index')->name('site.login');
 Route::post('/login', 'LoginController@autenticar')->name('site.login');
 
 Route::middleware('authenticade:padrao')->prefix('/app')->group( function() {

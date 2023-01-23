@@ -19,6 +19,7 @@
                 {{$errors->has('password') ? 'Senha inválida' : '' }}
                 <button type="submit" class="borda-preta">Acessar</button>
             </form>
+            {{isset($erro) && $erro!= '' ? $erro : ''}}
         </div>
         </div>  
     </div>
