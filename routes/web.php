@@ -22,9 +22,11 @@ Route::get('/login/{erro?}', 'LoginController@index')->name('site.login');
 Route::post('/login', 'LoginController@autenticar')->name('site.login');
 
 Route::middleware('authenticade:padrao')->prefix('/app')->group( function() {
-    Route::get('/clients', function(){return 'Clients';})->name('app.client');
+    Route::get('/home','HomeController@index')->name('app.home');
+    Route::get('/exit','LoginCOntroller@exit')->name('app.exit');
+    Route::get('/clients','ClientController@index' )->name('app.clients');
     Route::get('/provider', 'ProviderController@index')->name('app.provider');
-    Route::get('/products',function(){return 'Products';})->name('app.products');
+    Route::get('/products','ProductController@index')->name('app.products');
 });
 
 Route::fallback(function(){

@@ -9,7 +9,17 @@ class LoginController extends Controller
 {
     public function index(Request $request){
 
-        $erro=$request->get('erro');
+        $erro = '';
+
+        if($request->get('erro') == 1){
+            $erro = 'Usuário ou senha não existe';
+            
+        }
+        if($request->get('erro') == 2){
+            $erro = 'Necessário Login para acessar página';
+        }
+       
+
         return view('site.login',['title' => 'Login', 'erro' => $erro]);
     }
 
@@ -29,23 +39,28 @@ class LoginController extends Controller
 
         //recovery params of forms
         $email= $request->get('user');
-        $password=$request->get('password');  
-
-        echo "usr: $email  senha :$password";
+        $password= $request->get('password');  
 
         //Init Model User
         $user= new User();
 
-        $verify=$user->where('email', $email )
+        $verify = $user->where('email', $email )
         ->where('password',$password)
         ->get()
         ->first();
 
         
         if(isset($verify->name)){
-            echo'existe';
+
+            session_start();
+            $_SESSION['name'] = $verify-> name;
+            $_SESSION['email'] = $verify -> email;
+            $_SESSION['password'] = $verify -> password;
+
+            return redirect()->route('app.clients');
+
         } else {
-            return redirect()->route('site.login', ['erro' => 'Login inválido']);
+            return redirect()->route('site.login', ['erro' => 1]);
         }
        
     }
