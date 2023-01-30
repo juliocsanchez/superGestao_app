@@ -57,11 +57,16 @@ class LoginController extends Controller
             $_SESSION['email'] = $verify -> email;
             $_SESSION['password'] = $verify -> password;
 
-            return redirect()->route('app.clients');
+            return redirect()->route('app.home');
 
         } else {
             return redirect()->route('site.login', ['erro' => 1]);
         }
        
+    }
+
+    public function exit(){
+        session_destroy();
+        return redirect()->route('site.main');
     }
 }

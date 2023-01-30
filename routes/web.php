@@ -23,7 +23,7 @@ Route::post('/login', 'LoginController@autenticar')->name('site.login');
 
 Route::middleware('authenticade:padrao')->prefix('/app')->group( function() {
     Route::get('/home','HomeController@index')->name('app.home');
-    Route::get('/exit','LoginCOntroller@exit')->name('app.exit');
+    Route::get('/exit','LoginController@exit')->name('app.exit');
     Route::get('/clients','ClientController@index' )->name('app.clients');
     Route::get('/provider', 'ProviderController@index')->name('app.provider');
     Route::get('/products','ProductController@index')->name('app.products');
